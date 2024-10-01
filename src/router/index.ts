@@ -1,27 +1,27 @@
-import SettingsView from '@/views/SettingsView.vue'
-import TransactionsView from '@/views/TransactionsView.vue'
-import { createRouter, createWebHistory } from 'vue-router'
-import DashboardView from '../views/DashboardView.vue'
+import DashboardView from '@/views/DashboardView.vue'
+import { createRouter, createWebHistory, type RouteRecordRaw } from 'vue-router'
+
+const routes: Array<RouteRecordRaw> = [
+  {
+    path: '/',
+    name: 'dashboard',
+    component: DashboardView
+  },
+  {
+    path: '/transactions',
+    name: 'transactions',
+    component: () => import('@/views/TransactionsView.vue')
+  },
+  {
+    path: '/settings',
+    name: 'settings',
+    component: () => import('@/views/SettingsView.vue')
+  }
+]
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
-  routes: [
-    {
-      path: '/',
-      name: 'dashboard',
-      component: DashboardView
-    },
-    {
-      path: '/transactions',
-      name: 'transactions',
-      component: TransactionsView
-    },
-    {
-      path: '/settings',
-      name: 'settings',
-      component: SettingsView
-    }
-  ]
+  routes
 })
 
 export default router
