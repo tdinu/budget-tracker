@@ -4,17 +4,17 @@ import { createRouter, createWebHistory, type RouteRecordRaw } from 'vue-router'
 const routes: Array<RouteRecordRaw> = [
   {
     path: '/',
-    name: 'dashboard',
+    name: 'Dashboard',
     component: DashboardView
   },
   {
     path: '/transactions',
-    name: 'transactions',
+    name: 'Transactions',
     component: () => import('@/views/TransactionsView.vue')
   },
   {
     path: '/settings',
-    name: 'settings',
+    name: 'Settings',
     component: () => import('@/views/SettingsView.vue')
   }
 ]

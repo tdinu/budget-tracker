@@ -9,9 +9,17 @@
             :key="route.name"
             class="navbar-item flex relative items-center"
           >
-            <RouterLink :to="route.path" :class="{ active: isActive(route.path) }">{{
-              route.name
-            }}</RouterLink>
+            <RouterLink
+              :to="route.path"
+              :class="
+                cn(
+                  { active: isActive(route.path) },
+                  'w-full justify-start text-lg text-muted-foreground hover:text-foreground',
+                  isActive(route.path) && 'text-foreground font-semibold'
+                )
+              "
+              >{{ route.name }}</RouterLink
+            >
             <div
               v-show="isActive(route.path)"
               class="absolute -bottom-[2px] left-1/2 hidden h-[2px] w-[100%] -translate-x-1/2 rounded-xl bg-violet-500 md:block"
@@ -28,6 +36,7 @@
 import { ref } from 'vue'
 import { RouterLink, useRoute, useRouter } from 'vue-router'
 import AppLogo from './AppLogo.vue'
+import { cn } from '@/lib/utils'
 
 const router = useRouter()
 const routes = ref(router.options.routes)
