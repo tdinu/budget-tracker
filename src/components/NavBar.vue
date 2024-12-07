@@ -14,7 +14,7 @@
               :class="
                 cn(
                   { active: isActive(route.path) },
-                  'w-full justify-start text-lg text-muted-foreground hover:text-foreground',
+                  'w-full justify-start text-lg font-semibold text-muted-foreground hover:text-foreground',
                   isActive(route.path) && 'text-foreground font-semibold'
                 )
               "
