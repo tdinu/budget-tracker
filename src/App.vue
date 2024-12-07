@@ -3,7 +3,7 @@ import NavBar from './components/NavBar.vue'
 </script>
 
 <template>
-  <div class="bg-violet-200 h-screen">
+  <div class="h-screen">
     <NavBar />
     <router-view></router-view>
   </div>
