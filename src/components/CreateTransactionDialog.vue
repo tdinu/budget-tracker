@@ -34,6 +34,7 @@ import { Input } from '@/components/ui/input'
 import { cn } from '@/lib/utils'
 import { TYPES } from '@/types'
 import { categories } from '@/constants'
+import { expenses, incomes } from '../store/transactions'
 
 const props = defineProps({
   type: {
@@ -59,9 +60,28 @@ const { isFieldDirty, handleSubmit } = useForm({
 })
 
 const onSubmit = handleSubmit((values) => {
-  console.log('Form submitted!', values)
+  if (props.type === TYPES.EXPENSE) {
+    expenses.value.unshift({
+      category: values.category ?? '',
+      amount: values.amount ?? 0,
+      description: values.description ?? '',
+      date: new Date().toLocaleDateString()
+    })
+  } else if (props.type === TYPES.INCOME) {
+    incomes.value.unshift({
+      amount: values.amount ?? 0,
+      description: values.description ?? '',
+      date: new Date().toLocaleDateString()
+    })
+  }
   open.value = false
 })
+
+// const transactionType = ref<TYPES>(TYPES.EXPENSE);
+const description = ref('')
+const category = ref(categories[0].name)
+const amount = ref(0)
+const date = ref('')
 
 function handleOpenChange(isOpen: boolean) {
   open.value = isOpen
@@ -98,7 +118,12 @@ function handleOpenChange(isOpen: boolean) {
           <FormItem>
             <FormLabel>Description</FormLabel>
             <FormControl>
-              <Input type="text" placeholder="description" v-bind="componentField" />
+              <Input
+                type="text"
+                placeholder="description"
+                v-bind="componentField"
+                v-model="description"
+              />
             </FormControl>
             <FormDescription
               ><VisuallyHidden> Transaction description. </VisuallyHidden></FormDescription
@@ -110,7 +135,7 @@ function handleOpenChange(isOpen: boolean) {
           <FormItem>
             <FormLabel>Amount</FormLabel>
             <FormControl>
-              <Input type="number" placeholder="amount" v-bind="componentField" />
+              <Input type="number" placeholder="amount" v-bind="componentField" v-model="amount" />
             </FormControl>
             <FormDescription>
               <VisuallyHidden> Transaction amount. </VisuallyHidden>
@@ -133,7 +158,7 @@ function handleOpenChange(isOpen: boolean) {
                 </SelectTrigger>
               </FormControl>
               <SelectContent>
-                <SelectGroup>
+                <SelectGroup v-model="category">
                   <SelectItem
                     v-for="category in categories"
                     :key="category.id"
@@ -154,7 +179,7 @@ function handleOpenChange(isOpen: boolean) {
           <FormItem>
             <FormLabel>Date</FormLabel>
             <FormControl>
-              <Input type="text" placeholder="date" v-bind="componentField" />
+              <Input type="text" placeholder="date" v-bind="componentField" v-model="date" />
             </FormControl>
             <FormDescription>
               <VisuallyHidden> Transaction date. </VisuallyHidden>
