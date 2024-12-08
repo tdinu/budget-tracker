@@ -34,7 +34,7 @@ import { Input } from '@/components/ui/input'
 import { cn } from '@/lib/utils'
 import { TYPES } from '@/types'
 import { categories } from '@/constants'
-import { expenses, incomes } from '../store/transactions'
+import { expenses, incomes } from '@/store/transactions'
 
 const props = defineProps({
   type: {
@@ -77,12 +77,6 @@ const onSubmit = handleSubmit((values) => {
   open.value = false
 })
 
-// const transactionType = ref<TYPES>(TYPES.EXPENSE);
-const description = ref('')
-const category = ref(categories[0].name)
-const amount = ref(0)
-const date = ref('')
-
 function handleOpenChange(isOpen: boolean) {
   open.value = isOpen
 }
@@ -118,12 +112,7 @@ function handleOpenChange(isOpen: boolean) {
           <FormItem>
             <FormLabel>Description</FormLabel>
             <FormControl>
-              <Input
-                type="text"
-                placeholder="description"
-                v-bind="componentField"
-                v-model="description"
-              />
+              <Input type="text" placeholder="description" v-bind="componentField" />
             </FormControl>
             <FormDescription
               ><VisuallyHidden> Transaction description. </VisuallyHidden></FormDescription
@@ -135,7 +124,7 @@ function handleOpenChange(isOpen: boolean) {
           <FormItem>
             <FormLabel>Amount</FormLabel>
             <FormControl>
-              <Input type="number" placeholder="amount" v-bind="componentField" v-model="amount" />
+              <Input type="number" placeholder="amount" v-bind="componentField" />
             </FormControl>
             <FormDescription>
               <VisuallyHidden> Transaction amount. </VisuallyHidden>
@@ -158,7 +147,7 @@ function handleOpenChange(isOpen: boolean) {
                 </SelectTrigger>
               </FormControl>
               <SelectContent>
-                <SelectGroup v-model="category">
+                <SelectGroup>
                   <SelectItem
                     v-for="category in categories"
                     :key="category.id"
@@ -179,7 +168,7 @@ function handleOpenChange(isOpen: boolean) {
           <FormItem>
             <FormLabel>Date</FormLabel>
             <FormControl>
-              <Input type="text" placeholder="date" v-bind="componentField" v-model="date" />
+              <Input type="text" placeholder="date" v-bind="componentField" />
             </FormControl>
             <FormDescription>
               <VisuallyHidden> Transaction date. </VisuallyHidden>
