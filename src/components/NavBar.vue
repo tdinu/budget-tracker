@@ -54,7 +54,7 @@
                 :class="
                   cn(
                     { active: isActive(route.path) },
-                    'w-full justify-start text-2xl font-semibold py-4 text-muted-foreground hover:text-foreground',
+                    'w-full justify-start text-2xl font-semibold py-4 px-2 md:px-0text-muted-foreground hover:text-foreground',
                     isActive(route.path) && 'text-foreground'
                   )
                 "
@@ -63,7 +63,7 @@
               >
               <div
                 v-show="isActive(route.path)"
-                class="absolute -left-[12px] top-1/2 w-[4px] h-[80%] -translate-y-1/2 rounded-xl bg-violet-500"
+                class="absolute -left-[2px] top-1/2 w-[4px] h-[80%] -translate-y-1/2 rounded-xl bg-violet-500"
               ></div>
             </div>
             <SheetTitle> <VisuallyHidden>Title goes here</VisuallyHidden> </SheetTitle>
